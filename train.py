@@ -57,6 +57,7 @@ def main():
     frame=frame[(frame.date < args.as_of)&(frame.date>='2018-05-04')].sort_values('date').reset_index(drop=True)
     assert frame.date.is_unique and (frame.close>0).all()
     frame.to_csv(ROOT/'data/close.csv',index=False)
+    frame.to_csv(ROOT/'docs/close.csv',index=False)
     p=frame.close.to_numpy(); dates=frame.date.to_numpy(); idx=np.arange(max(WINDOWS),len(p))
     y=p[idx]; last=p[idx-1]; target=y/last-1
     test=(dates[idx]>='2026-01-01')&(dates[idx]<'2027-01-01'); pre=dates[idx]<'2026-01-01'
